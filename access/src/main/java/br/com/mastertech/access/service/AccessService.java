@@ -4,6 +4,7 @@ import br.com.mastertech.access.clients.customer.Customer;
 import br.com.mastertech.access.clients.customer.CustomerClient;
 import br.com.mastertech.access.clients.door.Door;
 import br.com.mastertech.access.clients.door.DoorClient;
+import br.com.mastertech.access.exception.AccessAlreadyExistsException;
 import br.com.mastertech.access.exception.AccessNotFoundException;
 import br.com.mastertech.access.model.Access;
 import br.com.mastertech.access.repository.AccessRepository;
@@ -28,6 +29,12 @@ public class AccessService {
         Customer customer = customerClient.getById(access.getCustomerId());
 
         Door door = doorClient.getById(access.getDoorId());
+
+        Optional<Access> selectedAccess = accessRepository.getByCustomerIdAndDoorId(customer.getId(), door.getId());
+
+        if(selectedAccess.isPresent()){
+            throw new AccessAlreadyExistsException();
+        }
 
         return accessRepository.save(access);
     }
