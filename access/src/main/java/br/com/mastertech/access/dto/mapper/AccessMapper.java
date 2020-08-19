@@ -3,6 +3,7 @@ package br.com.mastertech.access.dto.mapper;
 import br.com.mastertech.access.dto.AccessResponse;
 import br.com.mastertech.access.dto.CreateAccessRequest;
 import br.com.mastertech.access.model.Access;
+import br.com.mastertech.access.producer.AccessLog;
 import br.com.mastertech.access.repository.AccessRepository;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,16 @@ public class AccessMapper {
         accessResponse.setCustomerId(access.getCustomerId());
 
         return accessResponse;
+    }
+
+    public AccessLog toAccessLog(Long customerId, Long doorId, Boolean hasAccess){
+        AccessLog accessLog = new AccessLog();
+
+        accessLog.setCostumerId(customerId);
+        accessLog.setDoorId(doorId);
+        accessLog.setHasAccess(hasAccess);
+
+        return accessLog;
     }
 
 
