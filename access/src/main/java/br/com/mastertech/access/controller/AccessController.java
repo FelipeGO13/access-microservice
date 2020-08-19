@@ -45,7 +45,7 @@ public class AccessController {
             throw e;
         }
 
-        accessProducer.sendToKafka(accessMapper.toAccessLog(customerId, doorId, false));
+        accessProducer.sendToKafka(accessMapper.toAccessLog(customerId, doorId, true));
         return access;
     }
 
