@@ -19,7 +19,7 @@ public class AccessConsumer {
     @KafkaListener(topics = "spec4-felipe-gabriel-1", groupId = "teste")
     public void receber(@Payload AccessLog accessLog) throws IOException {
 
-          CSVWriter writer = new CSVWriter(new FileWriter(CSV_FILE_NAME));
+          CSVWriter writer = new CSVWriter(new FileWriter(CSV_FILE_NAME, true));
           String accessData = new StringBuilder()
                   .append(accessLog.getCostumerId())
                   .append(",")
